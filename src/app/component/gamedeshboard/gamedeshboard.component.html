@@ -1,0 +1,39 @@
+<div class="game-wrapper">
+    <div class="number-box-wrapper">
+
+        <div class="number-box horizontal">
+            
+            <div  [ngClass]="{'container': true, 'selectable-box': true}" *ngFor="let item of array" (click)="onNumberSelect(item)">
+                <div [ngClass]="{'number-label': true}">{{item}}</div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="msg" class="msg"> {{ msg }}</div>
+            <div class="score-board">
+            
+                <div class="left">
+                    <button class="btn-btn" (click)="playerOne()">Player 1st</button>
+                    <h4 class="score">Score : {{playerOneScore}} </h4>
+                </div>
+                <div  class="right">
+                    <button class="btn-btn"  (click)="playerTwo()">Player 2nd</button>
+                    <h4 class="score">Score : {{playerTwoScore}} </h4>
+                </div>
+           
+            </div>
+</div>
+
+
+<!-- <modal #winnerModel >
+    <modal-header>
+        <h1>Modal header</h1>
+    </modal-header>
+    <modal-content>
+      {{ msg }}
+    </modal-content>
+    <modal-footer>
+        <button class="btn btn-primary" (click)="closeModal()">Play Again</button>
+    </modal-footer>
+</modal> -->
+
+
