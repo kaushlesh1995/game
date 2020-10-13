@@ -12,6 +12,10 @@ export class GamedeshboardComponent implements OnInit {
   playerOneScore = 0;
   playerTwoScore = 0;
   msg = "";
+  playerOneActive = true;
+  playerTwoActive = false;
+
+ 
 
   @ViewChild('winnerModel')  winnerModel;
   private winnerModelRef;
@@ -44,6 +48,9 @@ export class GamedeshboardComponent implements OnInit {
     
   }
   onNumberSelect(num) {
+    if(!(this.array[0] == num) && !(this.array[ this.array.length-1] == num)){
+      return;
+    }
     this.selectedNumber = num;
     console.log("onNumberSelect selected", this.selectedNumber);
     // this.openWinnerModal();
@@ -54,12 +61,17 @@ export class GamedeshboardComponent implements OnInit {
     if(!(this.array[0] == this.selectedNumber) && !(this.array[ this.array.length-1] == this.selectedNumber)){
       return;
     }
+    if(!this.playerOneActive) {
+      return;
+    }
     this.playerOneScore = this.playerOneScore + this.selectedNumber;
     this.array = this.array.filter((item) => this.selectedNumber != item);
-    this.selectedNumber = 0;
-    this.hasWon()
-    console.log("playerOne selected", this.selectedNumber);
     
+    this.selectedNumber = 0;
+    this.hasWon();
+    this.playerTwoActive = true;
+    this.playerOneActive = false;
+
     
   }
 
@@ -67,10 +79,15 @@ export class GamedeshboardComponent implements OnInit {
     if(!(this.array[0] == this.selectedNumber) && !(this.array[ this.array.length-1] == this.selectedNumber)){
       return;
     }
+    if(!this.playerTwoActive) {
+      return;
+    }
     this.playerTwoScore = this.playerTwoScore + this.selectedNumber;
     this.array = this.array.filter((item) => this.selectedNumber != item);
     this.selectedNumber = 0;
     this.hasWon()
+    this.playerOneActive = true;
+    this.playerTwoActive = false;
     console.log("playerTwo selected", this.selectedNumber);
   }
 

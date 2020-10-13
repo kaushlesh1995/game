@@ -3,7 +3,7 @@
 
         <div class="number-box horizontal">
             
-            <div  [ngClass]="{'container': true, 'selectable-box': true}" *ngFor="let item of array" (click)="onNumberSelect(item)">
+            <div  *ngFor="let item of array" (click)="onNumberSelect(item)" [ngClass]="{'container': true, 'selectable-box': item == selectedNumber, 'cursor-pointer': (array[0] == item) || (array[array.length -1] == item)}">
                 <div [ngClass]="{'number-label': true}">{{item}}</div>
             </div>
         </div>
@@ -12,11 +12,11 @@
             <div class="score-board">
             
                 <div class="left">
-                    <button class="btn-btn" (click)="playerOne()">Player 1st</button>
+                    <button  [ngClass]="{'btn-btn': true, 'active-player': playerOneActive}"  (click)="playerOne()">Player 1st</button>
                     <h4 class="score">Score : {{playerOneScore}} </h4>
                 </div>
                 <div  class="right">
-                    <button class="btn-btn"  (click)="playerTwo()">Player 2nd</button>
+                    <button  [ngClass]="{'btn-btn': true, 'active-player': playerTwoActive}"  (click)="playerTwo()">Player 2nd</button>
                     <h4 class="score">Score : {{playerTwoScore}} </h4>
                 </div>
            
